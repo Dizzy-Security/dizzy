@@ -98,4 +98,3 @@ dizzy-scan sandbox attack <repo-url>
 | POST | `/api/v1/sandbox/{repo_url}/attack-paths/{path_id}/rerun` | Re-run a specific attack path |
 | POST | `/api/v1/sandbox/{repo_url}/attack` | Trigger a full attack |
 
-All sandbox endpoints require `sandbox_enabled` for the company.
