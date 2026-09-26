@@ -16,7 +16,7 @@ curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy
   -o /usr/local/bin/dizzy-scan && chmod +x /usr/local/bin/dizzy-scan
 ```
 
-**Windows (amd64)** — download `dizzy-scan-windows-amd64.exe` from the [releases page](https://github.com/Dizzy-Security/dizzy/releases/latest).
+**Windows (amd64)** | download `dizzy-scan-windows-amd64.exe` from the [releases page](https://github.com/Dizzy-Security/dizzy/releases/latest).
 
 ## Authenticate
 
@@ -66,8 +66,8 @@ dizzy-scan sandbox rerun <repo-url> <path-id>
 Triggers the attack via Claude on the live sandbox.
 
 Response: `{"status": "started|starting", "path_id": "..."}`
-- `started` — sandbox is running, attack agent has started
-- `starting` — sandbox is auto-starting first, attack will follow
+- `started` | sandbox is running, attack agent has started
+- `starting` | sandbox is auto-starting first, attack will follow
 
 The sandbox must be enabled for your company. `path_id` comes from `sandbox paths`.
 
@@ -79,11 +79,11 @@ dizzy-scan sandbox attack <repo-url>
 
 ## Agent workflow: triage and reproduce
 
-1. Check auth: `cat ~/.dizzy/token` — if missing, run `dizzy-scan login`
+1. Check auth: `cat ~/.dizzy/token` | if missing, run `dizzy-scan login`
 2. List issues: `dizzy-scan issues --json` → identify CRITICAL/HIGH open issues
 3. For each issue: `dizzy-scan sandbox paths <repo_url>` → find matching attack path by `title`/`category`
 4. Reproduce: `dizzy-scan sandbox rerun <repo_url> <path_id>`
-5. Report back: tell the user "Attack rerun triggered for [title] — results will appear in the platform"
+5. Report back: tell the user "Attack rerun triggered for [title] | results will appear in the platform"
 
 ## API reference (for direct HTTP calls)
 
