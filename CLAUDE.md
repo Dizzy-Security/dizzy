@@ -25,4 +25,4 @@ Auth: `Authorization: Bearer <token>` where token is the `dzsk_...` value from `
 
 ## CLI binary source
 
-The `dizzy-scan` CLI is built from source and published at `github.com/hagay3/dizzy-releases`. The binary is a single static Go executable — no dependencies to install.
+The `dizzy-scan` CLI is built from source and published at [github.com/Dizzy-Security/dizzy/releases](https://github.com/Dizzy-Security/dizzy/releases). The binary is a single static Go executable — no dependencies to install.

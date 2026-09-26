@@ -13,17 +13,17 @@ It provides:
 
 **Mac (Apple Silicon)**
 ```bash
-curl -sSL https://github.com/hagay3/dizzy-releases/releases/latest/download/dizzy-scan-darwin-arm64 \
+curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy-scan-darwin-arm64 \
   -o /usr/local/bin/dizzy-scan && chmod +x /usr/local/bin/dizzy-scan
 ```
 
 **Linux (amd64)**
 ```bash
-curl -sSL https://github.com/hagay3/dizzy-releases/releases/latest/download/dizzy-scan-linux-amd64 \
+curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy-scan-linux-amd64 \
   -o /usr/local/bin/dizzy-scan && chmod +x /usr/local/bin/dizzy-scan
 ```
 
-**Windows (amd64)** — download `dizzy-scan-windows-amd64.exe` from the [releases page](https://github.com/hagay3/dizzy-releases/releases/latest).
+**Windows (amd64)** — download `dizzy-scan-windows-amd64.exe` from the [releases page](https://github.com/Dizzy-Security/dizzy/releases/latest).
 
 ### 2. Log in
 
