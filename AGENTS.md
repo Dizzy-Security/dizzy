@@ -7,13 +7,13 @@ This skill lets AI agents query security issues and reproduce sandbox attacks us
 **Mac (Apple Silicon)**
 ```bash
 curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy-scan-darwin-arm64 \
-  -o /usr/local/bin/dizzy-scan && chmod +x /usr/local/bin/dizzy-scan
+  -o ~/bin/dizzy-scan && chmod +x ~/bin/dizzy-scan
 ```
 
 **Linux (amd64)**
 ```bash
 curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy-scan-linux-amd64 \
-  -o /usr/local/bin/dizzy-scan && chmod +x /usr/local/bin/dizzy-scan
+  -o ~/bin/dizzy-scan && chmod +x ~/bin/dizzy-scan
 ```
 
 **Windows (amd64)**
