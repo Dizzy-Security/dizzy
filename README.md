@@ -46,7 +46,11 @@ curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy
   -o /usr/local/bin/dizzy-scan && chmod +x /usr/local/bin/dizzy-scan
 ```
 
-**Windows (amd64)** | download `dizzy-scan-windows-amd64.exe` from the [releases page](https://github.com/Dizzy-Security/dizzy/releases/latest).
+**Windows (amd64)**
+```powershell
+Invoke-WebRequest -Uri "https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy-scan-windows-amd64.exe" `
+  -OutFile "$env:LOCALAPPDATA\Microsoft\WindowsApps\dizzy-scan.exe"
+```
 
 ---
 
@@ -58,7 +62,12 @@ curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy
 dizzy-scan login
 ```
 
-Opens your browser to `https://platform.dizzysecurity.com/auth/cli`. After authenticating, your API token is saved to `~/.dizzy/token` automatically. You only need to do this once.
+Opens your browser to `https://platform.dizzysecurity.com/auth/cli`. After authenticating, your API token is saved automatically. You only need to do this once.
+
+| Platform | Token location |
+|----------|---------------|
+| Mac / Linux | `~/.dizzy/token` |
+| Windows | `%USERPROFILE%\.dizzy\token` |
 
 ### 2. Fetch security issues
 

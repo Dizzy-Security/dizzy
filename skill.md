@@ -10,10 +10,16 @@ You have access to the `dizzy-scan` CLI for interacting with DizzySecurity.
 Check if the user is logged in:
 
 ```bash
+# Mac / Linux
 cat ~/.dizzy/token
+
+# Windows (PowerShell)
+type "$env:USERPROFILE\.dizzy\token"
 ```
 
 If the file doesn't exist or is empty, run `dizzy-scan login` and tell the user to authenticate in the browser. The browser will open `https://platform.dizzysecurity.com/auth/cli` | after authenticating, the token is saved automatically.
+
+Token location: `~/.dizzy/token` (Mac/Linux) | `%USERPROFILE%\.dizzy\token` (Windows)
 
 ## Workflow 1: Fetch and triage issues
 
@@ -34,23 +40,20 @@ Highlight CRITICAL and HIGH open issues. End with a summary line: "X critical, Y
 
 **Issue JSON fields:** `issue_id`, `title`, `severity` (CRITICAL|HIGH|MEDIUM|LOW), `status` (open|resolved|closed), `category`, `source` (ci_scan|sandbox), `repo_url`, `description`, `locations`, `first_seen_at`
 
+**Extra fields when present:**
+- `sandbox_data` — on sandbox issues: attack paths with `path_id`, `title`, `severity`, `entry_point`, `steps`, `rerun_status`. Use `path_id` directly — no separate lookup needed.
+- `deps` — on dependency summary issues: `[{name, version, severity}]` per vulnerable package.
+- `pr_url` — remediation PR link if one exists.
+
 ## Workflow 2: Reproduce an issue in the sandbox
 
-### Step 1 | List attack paths for the repo
+### Step 1 | Get the path_id
 
-```bash
-dizzy-scan sandbox paths <repo-url>
-```
+Sandbox issues returned by `dizzy-scan issues --json` already include `sandbox_data[].path_id`. Use it directly — no separate `sandbox paths` call needed.
 
-This calls `GET /api/v1/sandbox/{repo_url}/attack-paths`.
+If multiple paths are in `sandbox_data`, match by `title` similarity or ask the user which one to reproduce.
 
-Each path has: `path_id`, `title`, `severity`, `category`, `entry_point`, `steps`, `rerun_status`, `status`.
-
-### Step 2 | Match issue to attack path
-
-Match by `title` similarity or `category`. If multiple paths match, ask the user which one to reproduce.
-
-### Step 3 | Trigger the rerun
+### Step 2 | Trigger the rerun
 
 ```bash
 dizzy-scan sandbox rerun <repo-url> <path-id>
