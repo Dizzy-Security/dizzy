@@ -4,10 +4,10 @@ This skill lets AI agents query security issues and reproduce sandbox attacks us
 
 ## Install
 
-**Mac (Apple Silicon)**
+**Mac**
 ```bash
-curl -sSL https://github.com/Dizzy-Security/dizzy/releases/latest/download/dizzy-scan-darwin-arm64 \
-  -o ~/bin/dizzy-scan && chmod +x ~/bin/dizzy-scan
+brew tap dizzy-security/dizzy
+brew install dizzy-scan
 ```
 
 **Linux (amd64)**
