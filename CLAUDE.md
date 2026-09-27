@@ -11,10 +11,12 @@ Clients copy this directory (or clone it) into their own projects to give their 
 
 ## Using the skill
 
-When invoked (`/dizzy`), the agent should:
+`skill.md` is a Claude Code skill — it is loaded automatically by the agent when the task involves DizzySecurity (e.g. "show my security issues", "reproduce this attack"). It is **not** a slash command; users do not type `/dizzy`.
+
+When the skill is active, the agent should:
 1. Check `~/.dizzy/token` | if missing or empty, run `dizzy-scan login`
 2. For issue triage: `dizzy-scan issues --json`
-3. For reproduction: `dizzy-scan sandbox paths <repo>` → `dizzy-scan sandbox rerun <repo> <path-id>`
+3. For reproduction: `path_id` is embedded in `sandbox_data` on each sandbox issue — use it directly with `dizzy-scan sandbox rerun <repo> <path-id>`
 
 Full workflow is in `skill.md`. Full command reference is in `AGENTS.md`.
 
