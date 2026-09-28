@@ -137,5 +137,5 @@ All commands resolve to these backend endpoints. Agents can call them directly w
 | File | Purpose |
 |------|---------|
 | `AGENTS.md` | Full agent reference | install, auth, commands, API paths |
-| `skill.md` | Claude Code skill definition (`/dizzy`) |
+| `skill.md` | Claude Code skill — auto-loaded when you ask your agent about security issues |
 | `CLAUDE.md` | Claude Code project context (auto-loaded in this directory) |
