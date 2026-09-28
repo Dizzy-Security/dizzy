@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Context-Driven Security Agents | Find, triage, and reproduce security issues with your AI agent</strong>
+  <strong>Your friendly hacker | always trying to break into your app, always on your side</strong>
 </p>
 
 <p align="center">
@@ -22,17 +22,23 @@
 
 ## What is this?
 
-This repo gives your AI agent (Claude Code, Cursor, Copilot, or any agent that can run a terminal) direct access to the [DizzySecurity](https://dizzysecurity.com) platform.
+Dizzy is a friendly hacker that continuously tries to penetrate your app.
 
-It includes:
+It runs attack simulations against your repos around the clock, finds real exploitable vulnerabilities, and shows you live proof-of-exploit in a sandbox. When it breaks in, it tells you exactly how and exactly how to fix it.
 
-- **`dizzy-scan` CLI** | authenticate, query issues, and reproduce sandbox attack paths
-- **`skill.md`** | Claude Code skill — invoke with `/dizzy` for guided triage and reproduction workflows
-- **`AGENTS.md`** | full reference for any agent: install, auth, all commands, API paths
+This repo connects your AI coding agent (Claude Code, Cursor, Copilot) directly to Dizzy. Your agent can pull the latest attack results, show you what got breached, and walk you through the fix, without leaving your editor.
+
+
+Built for solo founders and small teams who ship fast and can't afford to get breached.
 
 ---
 
 ## Install
+
+**Mac (Homebrew)**
+```bash
+brew install Dizzy-Security/tap/dizzy-scan
+```
 
 **Mac (Apple Silicon)**
 ```bash
@@ -69,7 +75,7 @@ Opens your browser to `https://platform.dizzysecurity.com/auth/cli`. After authe
 | Mac / Linux | `~/.dizzy/token` |
 | Windows | `%USERPROFILE%\.dizzy\token` |
 
-### 2. Fetch security issues
+### 2. See what Dizzy broke into
 
 ```bash
 dizzy-scan issues                              # all issues
@@ -77,13 +83,13 @@ dizzy-scan issues --severity CRITICAL          # filter by severity (CRITICAL | 
 dizzy-scan issues --status open --json         # machine-readable JSON
 ```
 
-### 3. Reproduce a sandbox attack
+### 3. Watch the attack live
 
 ```bash
-# List attack paths for a repo
+# List attack paths Dizzy has found for your repo
 dizzy-scan sandbox paths https://github.com/your-org/your-repo
 
-# Re-run a specific attack path (triggers the AI attack agent on your live sandbox)
+# Re-run a specific attack (triggers a live exploit in the sandbox | you watch it happen)
 dizzy-scan sandbox rerun https://github.com/your-org/your-repo <path-id>
 ```
 
@@ -91,12 +97,12 @@ dizzy-scan sandbox rerun https://github.com/your-org/your-repo <path-id>
 
 ## Using with Claude Code
 
-Copy `skill.md` into your project as `.claude/skills/dizzy.md`, then run `/dizzy` inside Claude Code.
+Copy `skill.md` into your project as `.claude/skills/dizzy.md`. Claude will automatically use it when you ask about security issues in your repo.
 
-The agent will:
-1. Check auth — prompt `dizzy-scan login` if no token found
-2. Fetch and triage open security issues (severity-sorted table, CRITICAL | HIGH highlighted)
-3. Match issues to sandbox attack paths and trigger reruns on demand
+Your agent will:
+1. Check auth | prompt `dizzy-scan login` if no token found
+2. Pull the latest attacks Dizzy ran | severity-sorted, CRITICAL highlighted
+3. Show live sandbox replays and walk you through the fix
 
 ---
 
@@ -118,11 +124,11 @@ All commands resolve to these backend endpoints. Agents can call them directly w
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/api/v1/data/issues` | List all issues for the company |
+| GET | `/api/v1/data/issues` | List all issues Dizzy found |
 | GET | `/api/v1/sandbox` | List sandboxes |
-| GET | `/api/v1/sandbox/{repo_url}/attack-paths` | List attack paths |
-| POST | `/api/v1/sandbox/{repo_url}/attack-paths/{path_id}/rerun` | Re-run a specific attack path |
-| POST | `/api/v1/sandbox/{repo_url}/attack` | Trigger a full attack |
+| GET | `/api/v1/sandbox/{repo_url}/attack-paths` | List attack paths Dizzy has run |
+| POST | `/api/v1/sandbox/{repo_url}/attack-paths/{path_id}/rerun` | Re-run a specific attack |
+| POST | `/api/v1/sandbox/{repo_url}/attack` | Trigger a full attack run |
 
 ---
 
