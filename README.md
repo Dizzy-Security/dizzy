@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Your friendly hacker | always trying to break into your app, always on your side</strong>
+  <strong>Your friendly hacker, always trying to break into your app, always on your side</strong>
 </p>
 
 <p align="center">
