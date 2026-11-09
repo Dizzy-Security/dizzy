@@ -38,20 +38,17 @@ Present findings as a severity-sorted table:
 
 Highlight CRITICAL and HIGH open issues. End with a summary line: "X critical, Y high open issues."
 
-**Issue JSON fields:** `issue_id`, `title`, `severity` (CRITICAL|HIGH|MEDIUM|LOW), `status` (open|resolved|closed), `category`, `source` (ci_scan|sandbox), `repo_url`, `description`, `locations`, `first_seen_at`
+**Issue JSON fields:** `issue_id`, `title`, `severity` (CRITICAL|HIGH|MEDIUM|LOW), `status` (open|in_progress|resolved|closed), `category`, `source` (ci_scan|sandbox), `repo_url`, `description`, `locations`, `first_seen_at`, `last_seen_at`
 
 **Extra fields when present:**
-- `sandbox_data` — on sandbox issues: attack paths with `path_id`, `title`, `severity`, `entry_point`, `steps`, `rerun_status`. Use `path_id` directly — no separate lookup needed.
-- `deps` — on dependency summary issues: `[{name, version, severity}]` per vulnerable package.
+- `path_id` — on sandbox issues: the attack path ID. Use directly with `sandbox rerun` — no separate lookup needed.
 - `pr_url` — remediation PR link if one exists.
 
 ## Workflow 2: Reproduce an issue in the sandbox
 
 ### Step 1 | Get the path_id
 
-Sandbox issues returned by `dizzy-scan issues --json` already include `sandbox_data[].path_id`. Use it directly — no separate `sandbox paths` call needed.
-
-If multiple paths are in `sandbox_data`, match by `title` similarity or ask the user which one to reproduce.
+Sandbox issues returned by `dizzy-scan issues --json` already include a `path_id` field. Use it directly — no separate lookup needed.
 
 ### Step 2 | Trigger the rerun
 

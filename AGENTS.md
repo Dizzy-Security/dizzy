@@ -53,11 +53,10 @@ dizzy-scan issues --source sandbox         # filter by source (ci_scan, sandbox)
 dizzy-scan issues --status open --json     # machine-readable JSON output
 ```
 
-**JSON fields:** `issue_id`, `title`, `severity` (CRITICAL|HIGH|MEDIUM|LOW), `status` (open|resolved|closed), `category`, `source` (ci_scan|sandbox), `repo_url`, `description`, `locations`, `first_seen_at`, `last_seen_at`
+**JSON fields:** `issue_id`, `title`, `severity` (CRITICAL|HIGH|MEDIUM|LOW), `status` (open|in_progress|resolved|closed), `category`, `source` (ci_scan|sandbox), `repo_url`, `description`, `locations`, `first_seen_at`, `last_seen_at`
 
 **Extra fields when present:**
-- `deps` — on dependency summary issues: array of `{name, version, severity}` for each vulnerable package
-- `sandbox_data` — on sandbox issues: array of matching attack paths with `path_id`, `title`, `severity`, `category`, `entry_point`, `steps`, `rerun_status`. Use `path_id` directly with `sandbox rerun` — no separate `paths` lookup needed
+- `path_id` — on sandbox issues: the attack path ID. Use directly with `sandbox rerun` — no separate lookup needed.
 - `pr_url` — link to the remediation PR if one exists
 
 ## List sandboxes
@@ -90,7 +89,7 @@ dizzy-scan sandbox attack <repo-url>
 
 1. Check auth: Mac/Linux — `cat ~/.dizzy/token` | Windows — `type "%USERPROFILE%\.dizzy\token"` | if missing or empty, run `dizzy-scan login`
 2. List issues: `dizzy-scan issues --json` → identify CRITICAL/HIGH open issues
-3. Sandbox issues already include `sandbox_data[].path_id` — no separate lookup needed
+3. Sandbox issues include a `path_id` field — no separate lookup needed
 4. Reproduce: `dizzy-scan sandbox rerun <repo_url> <path_id>`
 5. Report back: tell the user "Attack rerun triggered for [title] | results will appear in the platform"
 

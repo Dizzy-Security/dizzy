@@ -86,10 +86,7 @@ dizzy-scan issues --status open --json         # machine-readable JSON
 ### 3. Watch the attack live
 
 ```bash
-# List attack paths Dizzy has found for your repo
-dizzy-scan sandbox paths https://github.com/your-org/your-repo
-
-# Re-run a specific attack (triggers a live exploit in the sandbox | you watch it happen)
+# Issues include a path_id — use it directly to reproduce an attack
 dizzy-scan sandbox rerun https://github.com/your-org/your-repo <path-id>
 ```
 
