@@ -56,7 +56,6 @@ dizzy-scan issues --status open --json     # machine-readable JSON output
 **JSON fields:** `issue_id`, `title`, `severity` (CRITICAL|HIGH|MEDIUM|LOW), `status` (open|in_progress|resolved|closed), `category`, `source` (ci_scan|sandbox), `repo_url`, `description`, `locations`, `first_seen_at`, `last_seen_at`
 
 **Extra fields when present:**
-- `path_id` — on sandbox issues: the attack path ID. Use directly with `sandbox rerun` — no separate lookup needed.
 - `pr_url` — link to the remediation PR if one exists
 
 ## List sandboxes
@@ -65,33 +64,17 @@ dizzy-scan issues --status open --json     # machine-readable JSON output
 dizzy-scan sandbox list
 ```
 
-## Re-run (reproduce) a specific attack path
-
-```bash
-dizzy-scan sandbox rerun <repo-url> <path-id>
-```
-
-Triggers the attack via Claude on the live sandbox.
-
-Response: `{"status": "started|starting", "path_id": "..."}`
-- `started` | sandbox is running, attack agent has started
-- `starting` | sandbox is auto-starting first, attack will follow
-
-The sandbox must be enabled for your company. `path_id` comes from `sandbox paths`.
-
 ## Trigger a full attack
 
 ```bash
 dizzy-scan sandbox attack <repo-url>
 ```
 
-## Agent workflow: triage and reproduce
+## Agent workflow: triage issues
 
 1. Check auth: Mac/Linux — `cat ~/.dizzy/token` | Windows — `type "%USERPROFILE%\.dizzy\token"` | if missing or empty, run `dizzy-scan login`
 2. List issues: `dizzy-scan issues --json` → identify CRITICAL/HIGH open issues
-3. Sandbox issues include a `path_id` field — no separate lookup needed
-4. Reproduce: `dizzy-scan sandbox rerun <repo_url> <path_id>`
-5. Report back: tell the user "Attack rerun triggered for [title] | results will appear in the platform"
+3. Report back with a severity-sorted summary
 
 ## API reference (for direct HTTP calls)
 
@@ -102,7 +85,5 @@ dizzy-scan sandbox attack <repo-url>
 |--------|------|-------------|
 | GET | `/api/v1/data/issues` | List all issues for the company |
 | GET | `/api/v1/sandbox` | List sandboxes |
-| GET | `/api/v1/sandbox/{repo_url}/attack-paths` | List attack paths (embedded in issues JSON as `sandbox_data`) |
-| POST | `/api/v1/sandbox/{repo_url}/attack-paths/{path_id}/rerun` | Re-run a specific attack path |
 | POST | `/api/v1/sandbox/{repo_url}/attack` | Trigger a full attack |
 

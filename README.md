@@ -123,8 +123,6 @@ All commands resolve to these backend endpoints. Agents can call them directly w
 |--------|------|-------------|
 | GET | `/api/v1/data/issues` | List all issues Dizzy found |
 | GET | `/api/v1/sandbox` | List sandboxes |
-| GET | `/api/v1/sandbox/{repo_url}/attack-paths` | List attack paths Dizzy has run |
-| POST | `/api/v1/sandbox/{repo_url}/attack-paths/{path_id}/rerun` | Re-run a specific attack |
 | POST | `/api/v1/sandbox/{repo_url}/attack` | Trigger a full attack run |
 
 ---
